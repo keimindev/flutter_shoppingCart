@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shopping/view/product_tile.dart';
 import 'package:get/get.dart';
 import 'package:flutter_shopping/controller/store_controller.dart';
 
@@ -42,11 +43,12 @@ class MyPageScreen extends StatelessWidget {
                 crossAxisSpacing: 10,
               ),
               itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.red,
+                //반복될 카드가 이미지와 텍스트를 이용하는 것이라서 그 타일 모양을 만들어주는게 좋다.
+                return ProductTile(
+                  controller.productList[index],
                 );
               },
-              itemCount: StoreController.productList.length,
+              itemCount: controller.productList.length,
             ),
           ),
         ),
