@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_shopping/controller/store_controller.dart';
 
 class MyPageScreen extends StatelessWidget {
-  const MyPageScreen({Key? key}) : super(key: key);
+  MyPageScreen({Key? key}) : super(key: key);
+
+  //dependency injection
+  final controller = Get.put(StoreController());
 
   // This widget is the root of your application.
   @override
@@ -26,19 +31,23 @@ class MyPageScreen extends StatelessWidget {
       body: Container(
         child: Padding(
           padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-          child: GridView.builder(
-            //grid size
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
+
+          //Obx는 grid view를 return 해줘야한다.
+          child: Obx(
+            () => GridView.builder(
+              //grid size
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) {
+                return Container(
+                  color: Colors.red,
+                );
+              },
+              itemCount: StoreController.productList.length,
             ),
-            itemBuilder: (context, index) {
-              return Container(
-                color: Colors.red,
-              );
-            },
-            itemCount: 20,
           ),
         ),
       ),
